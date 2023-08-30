@@ -1,30 +1,27 @@
 import {  Pressable, Text } from "react-native";
 import {useState} from "react";
 import { R } from "../../config";
+import * as Haptics from 'expo-haptics';
 
-
-const NumberKey = ({label}) => {
-    const [pressed,setPressed] = useState(false)
-    const handlePressIn = () => setPressed(true)
-    const handlePressOut = () => setPressed(false)
+const NumberKey = ({label,color,onPress}) => {
+    const handlePress = () => {Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy);onPress()}
     return (
         <Pressable
-            onPressIn= {handlePressIn}
-            onPressOut={handlePressOut}
+            onPress={handlePress}
             style={{
-                width: "30%",
+                width: "25%",
                 alignItems: "center",
                 justifyContent: "center",
-                paddingVertical: 4,
-                backgroundColor: pressed ? R.Colors.accentSuccess :'#fefefe',
-                borderRadius: 1000,
-                marginVertical: 5,
-                marginHorizontal: "1%",
+                paddingVertical: 10,
+                margin : 1,
+                borderRadius : 5,
+                backgroundColor : '#fff'
             }}
         >
             <Text
                 style={{
-                fontSize: 40,
+                fontSize: 28,
+                color : color
                 }}
             >
                 {label}

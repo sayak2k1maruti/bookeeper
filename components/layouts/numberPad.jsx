@@ -2,16 +2,18 @@ import { View, Text, Pressable, Button } from 'react-native'
 import React from 'react'
 import NumberKey from '../atoms/numberKey'
 import { Ionicons } from '@expo/vector-icons';
+import { R } from '../../config';
 
-const NumberPad = () => {
+const NumberPad = ({handleKeyPress,visibility}) => {
     const Keys = [
-        ['1','2','3'],
-        ['4','5','6'],
-        ['7','8','9'],
-        ['.','0',<Ionicons name="backspace-outline" size={24} color="black" />]
+        [['C','C'],['÷','÷'],['×','×'],['⌫','B']],
+        [['1','1'],['2','2'],['3','3'],['-','-']],
+        [['4','4'],['5','5'],['6','6'],['+','+']],
+        [['7','7'],['8','8'],['9','9'],['=','=']],
+        [['.','.'],['0','0'],['00','Z'],['✓','S']]
     ]
     return (
-        <View >
+        <View style={{position : 'absolute',bottom : 0,display:visibility?'flex':'none'}}>
             {
                 Keys.map((row,_key)=>(
                     <View style={{
@@ -21,7 +23,13 @@ const NumberPad = () => {
                     }}>
                         {
                             row.map((key,_key)=>(
-                                <NumberKey label = {key} key={_key}/>
+                                <NumberKey 
+                                    onPress = {handleKeyPress(key[1])}
+                                    color={key[1]=='S' ? 
+                                        R.Colors.accent.danger 
+                                        : 
+                                        R.Colors.text.primary} label={key[0]} 
+                                    key={_key} />
                             ))
                         }
                     </View>
