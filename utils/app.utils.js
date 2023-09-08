@@ -59,6 +59,7 @@ export const handleKeypadInput = (
         return amount.slice(0, amount.length - 1) + keyPressed;
       return amount + keyPressed;
     }
+
     if (keyPressed === ".") {
       if (_checkDecimalEligibily(amount)) {
         if (operators.includes(amount[amount.length - 1])) return amount + "0.";
@@ -66,6 +67,7 @@ export const handleKeypadInput = (
       }
       return amount;
     }
+    if (keyPressed === "Z") return amount === "0" ? "0" : amount + "00";
     if (amount === "0") return keyPressed;
     return amount + keyPressed;
   };
